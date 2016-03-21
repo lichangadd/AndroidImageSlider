@@ -23,7 +23,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
         this.adapter = adapter;
     }
 
-    public SliderAdapter getRealAdapter(){
+    public SliderAdapter getRealAdapter() {
         return this.adapter;
     }
 
@@ -31,7 +31,10 @@ public class InfinitePagerAdapter extends PagerAdapter {
     public int getCount() {
         // warning: scrolling to very high values (1,000,000+) results in
         // strange drawing behaviour
-        return Integer.MAX_VALUE;
+        if (this.adapter.isDisableSwipeRecycle())
+            return getRealCount();
+        else
+            return Integer.MAX_VALUE;
     }
 
     /**
@@ -43,7 +46,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        if(getRealCount() == 0){
+        if (getRealCount() == 0) {
             return null;
         }
         int virtualPosition = position % getRealCount();
@@ -56,7 +59,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        if(getRealCount() == 0){
+        if (getRealCount() == 0) {
             return;
         }
         int virtualPosition = position % getRealCount();

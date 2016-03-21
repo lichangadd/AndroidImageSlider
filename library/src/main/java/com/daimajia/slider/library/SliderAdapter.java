@@ -16,10 +16,19 @@ public class SliderAdapter extends PagerAdapter implements BaseSliderView.ImageL
 
     private Context mContext;
     private ArrayList<BaseSliderView> mImageContents;
+    private boolean disableSwipeRecycle;
 
     public SliderAdapter(Context context){
         mContext = context;
         mImageContents = new ArrayList<BaseSliderView>();
+    }
+
+    public boolean isDisableSwipeRecycle() {
+        return disableSwipeRecycle;
+    }
+
+    public void setDisableSwipeRecycle(boolean disableSwipeRecycle) {
+        this.disableSwipeRecycle = disableSwipeRecycle;
     }
 
     public <T extends BaseSliderView> void addSlider(T slider){
